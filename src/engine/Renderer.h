@@ -15,7 +15,8 @@ public:
 	void Present() const;
 
 	// Rendering Functions
-	vec2 Project(vec3& v, float scale, int w, int h);
+	vec2 ProjectOrthographic(vec3& v, float scale, int w, int h);
+	vec2 ProjectIsometric(const vec3& p, float scale, int w, int h);
 	void DrawLine(vec2 p1, vec2 p2);
 
 	// Getter to expose SDL_Renderer

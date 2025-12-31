@@ -8,8 +8,18 @@ Renderer::~Renderer() {
 	SDL_DestroyRenderer(_renderer);
 }
 
-vec2 Renderer::Project(vec3 &v, float scale, int w, int h) {
+vec2 Renderer::ProjectOrthographic(vec3 &v, float scale, int w, int h) {
 	return vec2(w/2 + v.x * scale, h/2 + v.y * scale );
+}
+
+vec2 Renderer::ProjectIsometric(const vec3& p, float scale, int w, int h) {
+	float isoX = (p.x - p.z);
+	float isoY = (p.x + p.z) * 0.5f - p.y;
+
+	return {
+		isoX * scale + w / 2.0f,
+		isoY * scale + h / 2.0f
+	};
 }
 
 void Renderer::DrawLine(vec2 p1, vec2 p2) {

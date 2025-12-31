@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_VEC3_H
 #define GRAPHICS_VEC3_H
 #include <iostream>
+#include <cmath>
 
 struct vec3 {
 	float x, y, z;
@@ -56,8 +57,8 @@ struct vec3 {
 	}
 
 	void rotateX(float angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = std::cos(angle);
+		float s = std::sin(angle);
 
 		float _y = y * c - z * s;
 		float _z = y * s + z * c;
@@ -67,8 +68,8 @@ struct vec3 {
 	}
 
 	void rotateY(float angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = std::cos(angle);
+		float s = std::sin(angle);
 
 		float _x = x * c - z * s;
 		float _z = x * s + z * c;
@@ -78,8 +79,8 @@ struct vec3 {
 	}
 
 	void rotateZ(float angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+		float c = std::cos(angle);
+		float s = std::sin(angle);
 
 		float _x = x * c - y * s;
 		float _y = x * s + y * c;
