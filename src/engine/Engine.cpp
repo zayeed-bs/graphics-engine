@@ -16,7 +16,6 @@ void Engine::Run() {
 	SDL_Event Event;
 
 	cube testCube;
-	cube testCube2;
 
 	Transform cubeTransform {vec3{0,0,0},
 			vec3{0,0,0},
@@ -34,6 +33,13 @@ void Engine::Run() {
 			}
 		}
 
+		// Update DeltaTime & Set Delay for Framerate
+		dt = static_cast<float>(SDL_GetTicks() - prev_tick);
+		prev_tick = SDL_GetTicks();
+
+		const int frameDelay = 1000 / FPS;
+		std::cout << "FPS: " << 1000 / dt << std::endl;
+
 		renderer.Clear();
 
 		// Looping rotation
@@ -42,23 +48,23 @@ void Engine::Run() {
 		cubeTransform.rotation.y = angle;
 		cubeTransform2.rotation.y = -angle;
 
+		for (auto const &e : testCube.edges) {
+			vec3 v0 = applyTransform(testCube.cubeVerts[e.first], cubeTransform);
+			vec3 v1 = applyTransform(testCube.cubeVerts[e.second], cubeTransform);
 
-		for (auto const &t : testCube.tris) {
-			vec3 v0 = applyTransform(t.p[0], SDL_GetTicks() > 5000 ? cubeTransform2 : cubeTransform);
-			vec3 v1 = applyTransform(t.p[1], SDL_GetTicks() > 5000 ? cubeTransform2 : cubeTransform);
-			vec3 v2 = applyTransform(t.p[2], SDL_GetTicks() > 5000 ? cubeTransform2 : cubeTransform);
-
-			// Project into 2d screen
 			vec2 p0 = renderer.ProjectIsometric(v0, 50, window.width, window.height);
 			vec2 p1 = renderer.ProjectIsometric(v1, 50, window.width, window.height);
-			vec2 p2 = renderer.ProjectIsometric(v2, 50, window.width, window.height);
 
-			// Draw wireframe
 			renderer.DrawLine(p0, p1);
-			renderer.DrawLine(p1, p2);
-			renderer.DrawLine(p2, p0);
 		}
 
 		renderer.Present();
+
+		// Time taken to render this frame
+
+		// Delay to maintain consistent FPS
+		if (const Uint32 frameTime = SDL_GetTicks() > prev_tick; frameTime < frameDelay) {
+			SDL_Delay(frameDelay - frameTime);
+		}
 	}
 }
