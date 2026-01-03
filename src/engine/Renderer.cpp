@@ -12,7 +12,7 @@ vec2 Renderer::ProjectOrthographic(vec3 &v, float scale, int w, int h) {
 	return vec2(w/2 + v.x * scale, h/2 + v.y * scale );
 }
 
-vec2 Renderer::ProjectIsometric(const vec3& p, float scale, int w, int h) {
+vec2 Renderer::ProjectIsometric(vec3& p, float scale, int w, int h) {
 	float isoX = (p.x - p.z);
 	float isoY = (p.x + p.z) * 0.5f - p.y;
 
