@@ -14,7 +14,7 @@ private:
 	Renderer renderer{*window.get()};
 
 	const int FPS = 60;
-	float dt;
-	Uint64 prev_tick;
+	float dt = 0;
+	Uint64 prev_tick = 0;
 };
 #endif //GRAPHICS_ENGINE_H

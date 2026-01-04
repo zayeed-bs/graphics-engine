@@ -15,6 +15,7 @@ add_executable(Graphics src/main.cpp
         src/math/mesh.h
         src/math/cube.h
         src/math/transform.h
+        src/core/object3d.h
 )
 
 find_package(SDL3 CONFIG REQUIRED)

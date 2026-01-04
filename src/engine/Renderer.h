@@ -3,6 +3,7 @@
 #include <SDL3/SDL_render.h>
 #include "../math/vec2.h"
 #include "../math/vec3.h"
+#include "../core/object3d.h"
 
 class Renderer {
 public:
@@ -17,6 +18,7 @@ public:
 	// Rendering Functions
 	vec2 ProjectOrthographic(vec3& v, float scale, int w, int h);
 	vec2 ProjectIsometric(vec3& p, float scale, int w, int h);
+	void RenderObject(const Object3D& obj, int s, int w, int h);
 	void DrawLine(vec2 p1, vec2 p2);
 
 	// Getter to expose SDL_Renderer

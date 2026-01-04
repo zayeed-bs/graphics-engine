@@ -1,5 +1,7 @@
 #include "Engine.h"
 #include <iostream>
+
+#include "../core/object3d.h"
 #include "../math/cube.h"
 #include "../math/transform.h"
 
@@ -15,15 +17,23 @@ void Engine::Run() {
 	bool isRunning = true;
 	SDL_Event Event;
 
-	cube testCube;
+	mesh cubeMesh = cube{}.cubeMesh;
 
 	Transform cubeTransform {vec3{0,0,0},
 			vec3{0,0,0},
 			vec3{1,1,1}};
 
-	Transform cubeTransform2 {vec3{5,0,0},
+	Transform cubeTransform2 {vec3{2,0,0},
 			vec3{0,0,0},
 			vec3{1,1,1}};
+
+	Transform cubeTransform3 {vec3{4,0,0},
+			vec3{0,0,0},
+			vec3{1,1,1}};
+
+	Object3D cube1 {&cubeMesh, cubeTransform};
+	Object3D cube2 {&cubeMesh, cubeTransform2};
+	Object3D cube3 {&cubeMesh, cubeTransform3};
 
 
 	while (isRunning) {
@@ -45,23 +55,17 @@ void Engine::Run() {
 		// Looping rotation
 		float angle = SDL_GetTicks() / 1000.0f;
 
-		cubeTransform.rotation.y = angle;
-		cubeTransform2.rotation.y = -angle;
+		cube1.transform.rotation.y = angle;
+		cube2.transform.rotation.y = angle;
 
-		for (auto const &e : testCube.edges) {
-			vec3 v0 = applyTransform(testCube.cubeVerts[e.first], cubeTransform);
-			vec3 v1 = applyTransform(testCube.cubeVerts[e.second], cubeTransform);
+		renderer.RenderObject(cube1, 100, window.width, window.height);
+		renderer.RenderObject(cube2, 100, window.width, window.height);
+		renderer.RenderObject(cube3, 100, window.width, window.height);
 
-			vec2 p0 = renderer.ProjectIsometric(v0, 50, window.width, window.height);
-			vec2 p1 = renderer.ProjectIsometric(v1, 50, window.width, window.height);
-
-			renderer.DrawLine(p0, p1);
-		}
 
 		renderer.Present();
 
 		// Time taken to render this frame
-
 		// Delay to maintain consistent FPS
 		if (const Uint32 frameTime = SDL_GetTicks() > prev_tick; frameTime < frameDelay) {
 			SDL_Delay(frameDelay - frameTime);

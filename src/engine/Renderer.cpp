@@ -22,6 +22,22 @@ vec2 Renderer::ProjectIsometric(vec3& p, float scale, int w, int h) {
 	};
 }
 
+void Renderer::RenderObject(const Object3D& obj, int s, int w, int h) {
+	for (auto const& t : obj.geometry->tris) {
+		vec3 v0 = applyTransform(t.p[0], obj.transform);
+		vec3 v1 = applyTransform(t.p[1], obj.transform);
+		vec3 v2 = applyTransform(t.p[2], obj.transform);
+
+		vec2 p0 = ProjectIsometric(v0, s, w, h);
+		vec2 p1 = ProjectIsometric(v1, s, w, h);
+		vec2 p2 = ProjectIsometric(v2, s, w, h);
+
+		DrawLine(p0, p1);
+		DrawLine(p1, p2);
+		DrawLine(p2, p0);
+	}
+}
+
 void Renderer::DrawLine(vec2 p1, vec2 p2) {
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255); // white
 	SDL_RenderLine(_renderer, p1.x, p1.y, p2.x, p2.y);
