@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_OBJECT3D_H
 #define GRAPHICS_OBJECT3D_H
 #include "../math/mesh.h"
-#include "../math/transform.h"
+#include "Transform.h"
 
 struct Object3D {
 	mesh* geometry = nullptr;

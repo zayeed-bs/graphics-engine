@@ -1,9 +1,9 @@
 #include "Engine.h"
 #include <iostream>
 
-#include "../core/object3d.h"
+#include "../core/Object3D.h"
 #include "../math/cube.h"
-#include "../math/transform.h"
+#include "../core/Transform.h"
 
 Engine::Engine() {
 	std::cout << "Successfully initialized engine" << std::endl;
@@ -57,6 +57,7 @@ void Engine::Run() {
 
 		cube1.transform.rotation.y = angle;
 		cube2.transform.rotation.y = angle;
+		cube3.transform.rotation.z = angle;
 
 		renderer.RenderObject(cube1, 100, window.width, window.height);
 		renderer.RenderObject(cube2, 100, window.width, window.height);

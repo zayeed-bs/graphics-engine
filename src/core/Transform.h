@@ -1,6 +1,6 @@
 #ifndef GRAPHICS_TRANSFORM_H
 #define GRAPHICS_TRANSFORM_H
-#include "vec3.h"
+#include "../math/vec3.h"
 
 struct Transform {
 	vec3 position {0};

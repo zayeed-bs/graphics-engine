@@ -3,7 +3,7 @@
 #include <SDL3/SDL_render.h>
 #include "../math/vec2.h"
 #include "../math/vec3.h"
-#include "../core/object3d.h"
+#include "../core/Object3D.h"
 
 class Renderer {
 public:
