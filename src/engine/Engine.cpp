@@ -62,17 +62,12 @@ void Engine::Run() {
 
 		// Looping rotation
 		float angle = SDL_GetTicks() / 1000.0f;
+		MainCamera.transform.rotation.y = angle;
 
-		// if (angle < 2*3.14156) {
-			cube1.transform.rotation.y = angle;
-			cube2.transform.rotation.x = angle;
-			cube3.transform.rotation.z = angle;
+		renderer.RenderScene(scene, MainCamera, 100, window.width, window.height);
 
-			renderer.RenderScene(scene, MainCamera, 100, window.width, window.height);
+		renderer.Present();
 
-			renderer.Present();
-
-		// }
 
 		// Time taken to render this frame
 		// Delay to maintain consistent FPS

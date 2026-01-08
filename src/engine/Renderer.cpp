@@ -22,11 +22,16 @@ vec2 Renderer::ProjectIsometric(vec3& p, float scale, int w, int h) {
 	};
 }
 
-void Renderer::RenderObject(const Object3D& obj, int s, int w, int h) {
+void Renderer::RenderObject(const Object3D& obj, int s, int w, int h, Camera& cam) {
 	for (auto const& t : obj.geometry->tris) {
 		vec3 v0 = applyTransform(t.p[0], obj.transform);
 		vec3 v1 = applyTransform(t.p[1], obj.transform);
 		vec3 v2 = applyTransform(t.p[2], obj.transform);
+
+		// World → View ()
+		v0 = WorldToView(v0, cam);
+		v1 = WorldToView(v1, cam);
+		v2 = WorldToView(v2, cam);
 
 		vec2 p0 = ProjectIsometric(v0, s, w, h);
 		vec2 p1 = ProjectIsometric(v1, s, w, h);
@@ -40,7 +45,7 @@ void Renderer::RenderObject(const Object3D& obj, int s, int w, int h) {
 
 void Renderer::RenderScene(Scene& scene, Camera& camera, int s, int w, int h) {
 	for (Object3D* o : scene.objects) {
-		RenderObject(*o, s, w, h);
+		RenderObject(*o, s, w, h, camera);
 	}
 }
 

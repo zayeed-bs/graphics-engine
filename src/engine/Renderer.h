@@ -20,7 +20,7 @@ public:
 	// Rendering Functions
 	vec2 ProjectOrthographic(vec3& v, float scale, int w, int h);
 	vec2 ProjectIsometric(vec3& p, float scale, int w, int h);
-	void RenderObject(const Object3D& obj, int s, int w, int h);
+	void RenderObject(const Object3D& obj, int s, int w, int h, Camera& cam);
 	void RenderScene(Scene& scene, Camera& camera, int s, int w, int h);
 	void DrawLine(vec2 p1, vec2 p2);
 
