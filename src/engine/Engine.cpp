@@ -18,6 +18,7 @@ void Engine::Run() {
 	SDL_Event Event;
 
 	mesh cubeMesh = cube{}.cubeMesh;
+	Scene scene {};
 
 	Transform cubeTransform {vec3{0,0,0},
 			vec3{0,0,0},
@@ -35,10 +36,17 @@ void Engine::Run() {
 	Object3D cube2 {&cubeMesh, cubeTransform2};
 	Object3D cube3 {&cubeMesh, cubeTransform3};
 
+	scene.objects.push_back(&cube1);
+	scene.objects.push_back(&cube2);
+	scene.objects.push_back(&cube3);
 
 	while (isRunning) {
 		while (SDL_PollEvent(&Event)) {
 			if (Event.type == SDL_EVENT_QUIT) {
+				isRunning = false;
+			}
+
+			if (Event.type == SDL_EVENT_KEY_UP && Event.key.key == SDLK_Q) {
 				isRunning = false;
 			}
 		}
@@ -55,16 +63,16 @@ void Engine::Run() {
 		// Looping rotation
 		float angle = SDL_GetTicks() / 1000.0f;
 
-		cube1.transform.rotation.y = angle;
-		cube2.transform.rotation.y = angle;
-		cube3.transform.rotation.z = angle;
+		// if (angle < 2*3.14156) {
+			cube1.transform.rotation.y = angle;
+			cube2.transform.rotation.x = angle;
+			cube3.transform.rotation.z = angle;
 
-		renderer.RenderObject(cube1, 100, window.width, window.height);
-		renderer.RenderObject(cube2, 100, window.width, window.height);
-		renderer.RenderObject(cube3, 100, window.width, window.height);
+			renderer.RenderScene(scene, MainCamera, 100, window.width, window.height);
 
+			renderer.Present();
 
-		renderer.Present();
+		// }
 
 		// Time taken to render this frame
 		// Delay to maintain consistent FPS

@@ -13,10 +13,10 @@ public:
 private:
 	Window window{1280, 720};
 	Renderer renderer{*window.get()};
-	Camera MainCamera{Object3D{nullptr, Transform{}}, true, vec3{}, vec3{}};
+	Camera MainCamera{};
 
-	const int FPS = 60;
-	float dt = 0;
-	Uint64 prev_tick = 0;
+	const int FPS{60};
+	float dt{0};
+	Uint64 prev_tick{0};
 };
 #endif //GRAPHICS_ENGINE_H

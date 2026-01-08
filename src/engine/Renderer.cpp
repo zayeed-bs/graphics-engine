@@ -38,6 +38,12 @@ void Renderer::RenderObject(const Object3D& obj, int s, int w, int h) {
 	}
 }
 
+void Renderer::RenderScene(Scene& scene, Camera& camera, int s, int w, int h) {
+	for (Object3D* o : scene.objects) {
+		RenderObject(*o, s, w, h);
+	}
+}
+
 void Renderer::DrawLine(vec2 p1, vec2 p2) {
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255); // white
 	SDL_RenderLine(_renderer, p1.x, p1.y, p2.x, p2.y);
